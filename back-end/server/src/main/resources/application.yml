@@ -1,0 +1,71 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: dev
+  main:
+    allow-circular-references: true
+  datasource:
+    druid:
+      driver-class-name: ${moordash.datasource.driver-class-name}
+      url: jdbc:mysql://${moordash.datasource.host}:${moordash.datasource.port}/${moordash.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: ${moordash.datasource.username}
+      password: ${moordash.datasource.password}
+  redis:
+    host: ${moordash.redis.host}
+    port: ${moordash.redis.port}
+    password: ${moordash.redis.password}
+    database: ${moordash.redis.database}
+
+mybatis:
+  # specified mapper config files: scan all xml files in the mapper directory
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.moordash.entity
+  configuration:
+    # activate the camel case naming convention
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com:
+      moordash:
+        mapper: debug
+        service: info
+        controller: info
+
+moordash:
+  jwt:
+    # set the secret key used for jwt signature encryption
+    admin-secret-key:
+    # set the expiration time of the jwt token
+    admin-ttl: 7200000
+    # set the token name passed from the front end
+    admin-token-name: token
+    user-secret-key:
+    user-ttl: 7200000
+    user-token-name: authentication
+  alioss:
+    endpoint: ${moordash.alioss.endpoint}
+    access-key-id: ${moordash.alioss.access-key-id}
+    access-key-secret: ${moordash.alioss.access-key-secret}
+    bucket-name: ${moordash.alioss.bucket-name}
+  awsoss:
+    access-key: ${moordash.awsoss.access-key}
+    secret-key: ${moordash.awsoss.secret-key}
+    bucket-name: ${moordash.awsoss.bucket-name}
+    region: ${moordash.awsoss.region}
+  wechat:
+    appid: ${moordash.wechat.appid}
+    secret: ${moordash.wechat.secret}
+    mchid: ${moordash.wechat.mchid}
+    mchSerialNo: ${moordash.wechat.mchSerialNo}
+    privateKeyFilePath: ${moordash.wechat.privateKeyFilePath}
+    apiV3Key: ${moordash.wechat.apiV3Key}
+    weChatPayCertFilePath: ${moordash.wechat.weChatPayCertFilePath}
+    notifyUrl: ${moordash.wechat.notifyUrl}
+    refundNotifyUrl: ${moordash.wechat.refundNotifyUrl}
+  shop:
+    address: 2281 Bonisteel Blvd, Ann Arbor, MI 48109
+  baidu:
+    ak: EFEEFFEFEFE
